@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/layout/Button";
-import { Input } from "@/components/layout/Input";
-import { Label } from "@/components/layout/Label";
+import { Button, Input, Label } from "@/components";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 

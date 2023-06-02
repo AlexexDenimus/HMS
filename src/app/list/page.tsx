@@ -1,4 +1,4 @@
-import { ItemCard } from "@/components/ItemCard";
+import { ItemCard } from "@/components";
 import { getAllStaff } from "../../../prisma/staff";
 
 export default async function Page() {

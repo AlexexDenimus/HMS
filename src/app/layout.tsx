@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import "./globals.css";
 import { Montserrat } from "next/font/google";
-import { PageLayout } from "@/components/layout/PageLayout";
+import { PageLayout } from "@/components";
 import { Providers } from "./providers";
 
 const inter = Montserrat({

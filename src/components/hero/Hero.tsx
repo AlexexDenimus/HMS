@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ButtonToList } from "./ButtonToList";
+import { ButtonToList } from "./components/ButtonToList";
 
 export const Hero = () => {
   return (
