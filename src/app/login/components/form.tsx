@@ -3,44 +3,48 @@
 import { useState } from "react";
 import { Button, Input, Label } from "@/components";
 import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
 
 export const Form = () => {
-  const searchParams = useSearchParams();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
-      await signIn("credentials", { email, password, callbackUrl });
+      const res = await signIn("credentials", {
+        email,
+        password,
+        callbackUrl: "/",
+      });
     } catch (err) {
       console.log(err);
     }
-    e.preventDefault();
   };
 
   return (
     <form onSubmit={onSubmit} className="space-y-12 w-[400px]">
-      <div className="flex items-center space-x-2">
+      <div className="flex flex-col space-y-2">
+        <Label htmlFor="email">Email:</Label>
         <Input
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           id="email"
         />
-        <Label htmlFor="email">Email: </Label>
       </div>
-      <div className="flex items-center space-x-2">
+      <div className="flex flex-col space-y-2">
+        <Label htmlFor="password">Password:</Label>
         <Input
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           id="password"
+          type="password"
         />
-        <Label htmlFor="password">Password: </Label>
       </div>
-      <Button type="submit">Login</Button>
+      <Button className="w-full" type="submit">
+        Login
+      </Button>
     </form>
   );
 };

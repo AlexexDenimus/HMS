@@ -9,6 +9,7 @@ export const Form = () => {
   const [password, setPassword] = useState<string>("");
 
   const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
       const user = await fetch("/api/register", {
         method: "POST",
@@ -16,36 +17,40 @@ export const Form = () => {
         headers: { "Content-Type": "application/json" },
       });
 
+      console.log(user);
+
       if (user) {
         signIn();
       }
     } catch (err) {
       console.log(err);
     }
-    e.preventDefault();
   };
 
   return (
     <form onSubmit={onSubmit} className="space-y-12 w-[400px]">
-      <div className="flex items-center space-x-2">
+      <div className="flex flex-col space-y-2">
+        <Label htmlFor="email">Email: </Label>
         <Input
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           id="email"
         />
-        <Label htmlFor="email">Email: </Label>
       </div>
-      <div className="flex items-center space-x-2">
+      <div className="flex flex-col space-y-2">
+        <Label htmlFor="password">Password: </Label>
         <Input
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           id="password"
+          type="password"
         />
-        <Label htmlFor="password">Password: </Label>
       </div>
-      <Button type="submit">Register</Button>
+      <Button className="w-full" type="submit">
+        Register
+      </Button>
     </form>
   );
 };

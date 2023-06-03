@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "./layout/Button";
+import { AuthButtonsWidget } from "./auth";
 
 export const Header = () => (
   <div
@@ -8,6 +8,7 @@ export const Header = () => (
   >
     <div className="flex items-center font-bold">
       <Image
+        priority
         className="mx-5"
         src="/logo.png"
         alt="logo"
@@ -21,8 +22,8 @@ export const Header = () => (
         </Link>
       </div>
     </div>
-    <div className="flex mr-10">
-      <Button>Login</Button>
+    <div className="mr-10">
+      <AuthButtonsWidget />
     </div>
   </div>
 );
