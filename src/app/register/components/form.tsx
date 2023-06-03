@@ -17,10 +17,12 @@ export const Form = () => {
         headers: { "Content-Type": "application/json" },
       });
 
-      console.log(user);
-
       if (user) {
-        signIn();
+        signIn("credentials", {
+          email,
+          password,
+          callbackUrl: "/",
+        });
       }
     } catch (err) {
       console.log(err);

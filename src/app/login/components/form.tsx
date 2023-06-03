@@ -11,7 +11,7 @@ export const Form = () => {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await signIn("credentials", {
+      await signIn("credentials", {
         email,
         password,
         callbackUrl: "/",
