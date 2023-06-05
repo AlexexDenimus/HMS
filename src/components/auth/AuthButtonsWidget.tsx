@@ -7,6 +7,7 @@ import {
   RegisterButton,
 } from "./components/AuthButtons";
 import { Skeleton } from "../layout";
+import Link from "next/link";
 
 export const AuthButtonsWidget = () => {
   const { data, status } = useSession();
@@ -18,7 +19,9 @@ export const AuthButtonsWidget = () => {
   if (status === "authenticated") {
     return (
       <div className="flex space-x-10 items-center">
-        <p>{data.user?.name || data.user?.email}</p>
+        <Link href={"/user"} className="text-primary hover:text-primary-dark">
+          {data.user?.name || data.user?.email}
+        </Link>
         <LogoutButton />
       </div>
     );

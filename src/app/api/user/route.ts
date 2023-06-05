@@ -1,22 +1,22 @@
 import { NextResponse } from "next/server";
 import prisma from "../../../../prisma/prisma";
-import { hash } from "bcrypt";
 
-export async function POST(req: Request) {
+export async function PUT(req: Request) {
   try {
-    const { email, password } = await req.json();
+    const { email, name, id } = await req.json();
 
-    const hashedPassword = await hash(password, 12);
-
-    const user = await prisma.user.create({
+    const user = await prisma.user.update({
+      where: {
+        id,
+      },
       data: {
         email,
-        password: hashedPassword,
+        name,
       },
     });
 
     return NextResponse.json({
-      user: { email: user.email },
+      user: { email: user.email, user: user.name },
     });
   } catch (err: any) {
     return new NextResponse(

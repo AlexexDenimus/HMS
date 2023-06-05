@@ -52,16 +52,29 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    session: ({ session, token }) => {
+    session: ({ session, token, user }) => {
+      const userName = token.name || session.user?.name;
+      const userEmail = token.email || session.user?.email;
+
       return {
         ...session,
         user: {
           ...session.user,
           id: token.id,
+          name: userName,
+          email: userEmail,
         },
       };
     },
-    jwt: ({ token, user }) => {
+    jwt: ({ token, user, trigger, session }) => {
+      if (trigger === "update") {
+        return {
+          ...token,
+          name: session.user.name,
+          email: session.user.email,
+        };
+      }
+
       if (user) {
         return {
           ...token,
